@@ -1,5 +1,7 @@
 # Toshi SOFA App
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mapmeld/toshi-capital-bot.svg)](https://greenkeeper.io/)
+
 This repo helps you build a [Toshi app](https://www.toshi.org) in Javascript.
 
 The sample bot can:
