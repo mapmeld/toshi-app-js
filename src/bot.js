@@ -9,7 +9,7 @@ let bot = new Bot()
 bot.onEvent = function(session, message) {
   switch (message.type) {
     case 'Init':
-      welcome(session)
+      welcome(session, message)
       break
     case 'Message':
       onMessage(session, message)
@@ -21,13 +21,13 @@ bot.onEvent = function(session, message) {
       onPayment(session, message)
       break
     case 'PaymentRequest':
-      welcome(session)
+      welcome(session, message)
       break
   }
 }
 
 function onMessage(session, message) {
-  welcome(session)
+  welcome(session, message);
 }
 
 function onCommand(session, command) {
@@ -68,8 +68,14 @@ function onPayment(session, message) {
 
 // STATES
 
-function welcome(session) {
-  sendMessage(session, `Hello Token!`)
+const capitals = {
+  'newhampshire': 'Concord',
+  'newyork': 'Albany'
+};
+
+function welcome(session, message) {
+  let region = message.body.toLowerCase().replace(/\s+/g, '');
+  sendMessage(session, capitals[region] || 'I did not recognize that country!')
 }
 
 function pong(session) {
@@ -100,7 +106,7 @@ function sendMessage(session, message) {
   ]
   session.reply(SOFA.Message({
     body: message,
-    controls: controls,
+    controls: [], // controls,
     showKeyboard: false,
   }))
 }
